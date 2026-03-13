@@ -40,7 +40,7 @@ The learned embeddings are evaluated through several experiments:
 * Semantic clustering of related words
 * Analysis of morphological patterns (e.g., singular–plural forms)
 
-You can find visualization here --
+You can find visualization here -- https://annaryzhenkoo.github.io/Word2Vec/
 
 ---
 
