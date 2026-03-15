@@ -1,26 +1,26 @@
 import re
 import html
 import unicodedata
-from typing import List, Optional
+from typing import List, Optional, Dict
 from collections import Counter
 
-pattern_http = re.compile(r'https?://\S+|www\.\S+')
-pattern_html = re.compile(r'<[^>]+>')
+pattern_http = re.compile(r"https?://\S+|www\.\S+")
+pattern_html = re.compile(r"<[^>]+>")
+
 
 def clean_refs(text: str) -> str:
 
     text = html.unescape(text)
-    text = pattern_html.sub('', text)
-    text = pattern_http.sub('', text)
+    text = pattern_html.sub("", text)
+    text = pattern_http.sub("", text)
 
     return text
 
-RE_TOKEN = re.compile(
-    r"[a-z]+(?:'[a-z]+)?|\d+",
-    flags=re.IGNORECASE
-)
 
-def tokenization(text:str, word_counts: Optional[Counter] = None) -> List[str]:
+RE_TOKEN = re.compile(r"[a-z]+(?:'[a-z]+)?|\d+", flags=re.IGNORECASE)
+
+
+def tokenization(text: str, word_counts: Optional[Counter] = None) -> List[str]:
     text = unicodedata.normalize("NFKD", text)
     text = text.replace("’", "'").replace("`", "'").replace("´", "'")
     text = re.sub(r"\s#39;[sS]\b", "'s", text)
@@ -33,7 +33,8 @@ def tokenization(text:str, word_counts: Optional[Counter] = None) -> List[str]:
 
     return tokens
 
-def encode_text(text:str, word2id) -> List[int]:
+
+def encode_text(text: str, word2id: Dict[str,int]) -> List[int]:
     tokens = tokenization(text)
 
     tokenized_texts = []

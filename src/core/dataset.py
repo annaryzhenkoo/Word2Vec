@@ -1,7 +1,8 @@
 from typing import List, Tuple
 import numpy as np
+from typing import Counter
 
-def subsample(tokens, id_counts, total_tokens, t=1e-3):
+def subsample(tokens: List[int], id_counts: Counter, total_tokens:int, t:int=1e-3):
     result = []
     for w in tokens:
         f = id_counts[w] / total_tokens
@@ -11,13 +12,13 @@ def subsample(tokens, id_counts, total_tokens, t=1e-3):
     return result
 
 
-def build_skipgram_pairs(tokens: List[int], context_window: int,
-                         id_counts, total_counts) -> List[Tuple[int, int]]:
+def build_skipgram_pairs(
+    tokens: List[int], context_window: int, id_counts: Counter, total_counts:int
+) -> List[Tuple[int, int]]:
     pairs: List[Tuple[int, int]] = []
     tokens = subsample(tokens, id_counts, total_counts)
     n = len(tokens)
 
-    #for i in tqdm(range(n), desc="Building skip-gram pairs"):
     for i in range(n):
         center = tokens[i]
 
