@@ -33,5 +33,5 @@ def plot_top_words_map(model: Word2VecSGNS, popular_words: int, word_counts: Cou
     fig.update_traces(marker=dict(size=7))
     fig.update_layout(width=1000, height=800)
 
-    fig.write_html("outputs/docs/top_words_map.docs")
+    fig.write_html("outputs/docs/top_words_map.html")
     fig.show()

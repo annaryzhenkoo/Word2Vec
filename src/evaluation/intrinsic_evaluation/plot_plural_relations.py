@@ -101,4 +101,4 @@ def plot_plural_relations(model: Word2VecSGNS):
     )
 
     fig.show()
-    fig.write_html("outputs/docs/plural_relations.docs")
+    fig.write_html("outputs/docs/plural_relations.html")

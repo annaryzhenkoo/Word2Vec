@@ -5,7 +5,9 @@
 
 <body>
 
-<h1 style="text-align:center;">Visualization of the 190 most frequent words</h1>
+<h1 style="text-align:center;">Intrinsic Evaluations</h1>
+
+<h2 style="text-align:center;">Visualization of the 200 most frequent words</h2>
 
 <iframe
     src="outputs/docs/top_words_map.html"
@@ -15,13 +17,12 @@
 </iframe>
 
 <p style="text-align:center; max-width:800px; margin:auto;">
-The figure shows a visualization of the 190 most frequent words. Several semantic
-clusters can be observed: for instance, weekdays are grouped closely together,
-while weekend days appear slightly separated. Additionally, there is a noticeable
-cluster related to the Olympics and sports.
+This plot shows a 2D projection of the 200 most frequent words in the dataset based on their embeddings. Words with similar meanings or functions are located close to each other.
+
+Clusters can be observed for numbers, pronouns, and directional words like south and north, as well as nationality-related words such as german, english and french.
 </p>
 
-<h1 style="text-align:center;">Clusterization</h1>
+<h2 style="text-align:center;">Clusterization</h2>
 
 <iframe
         src="outputs/docs/clusters_map.html"
@@ -31,20 +32,14 @@ cluster related to the Olympics and sports.
 </iframe>
 
 <p style="text-align:center; max-width:800px; margin:auto;">
-        In this experiment, I manually selected several semantic groups of words
-        (days of the week, months, directions, colors, and animals). Their
-        Word2Vec embeddings were extracted and clustered using the KMeans
-        algorithm and visualized in two dimensions.
+This plot shows the result of KMeans clustering applied to Word2Vec embeddings of selected semantic groups. Words are grouped into clusters that reflect their semantic similarity.
 
-        As shown in the figure, the days of the week form a clear cluster.
-        Similarly, most of the months are located close to each other,
-        indicating that the embeddings capture their semantic similarity.
+An interesting observation is that the word “may” does not appear within the months cluster, likely due to its ambiguity as a modal verb. Additionally, the months and animals clusters are slightly mixed, and animals and colors are located close to each other.
 
-        An interesting observation is that the word May appears relatively
-        far from the other months due to its ambiguity as a modal verb.
+Overall, the clustering is good, as most words from the same semantic categories are grouped together in the embedding space.
 </p>
 
-<h1 style="text-align:center;">Country and Capital relations</h1>
+<h2 style="text-align:center;">Country and Capital relations</h2>
 
 <iframe
         src="outputs/docs/capital_relationships.html"
@@ -57,7 +52,7 @@ cluster related to the Olympics and sports.
 PCA projection of country and capital word embeddings showing consistent vector relationships between countries and their capitals.
 </p>
 
-<h1 style="text-align:center;">Comparative relations</h1>
+<h2 style="text-align:center;">Comparative relations</h2>
 
 <iframe
         src="outputs/docs/comparative_relations.html"
@@ -67,14 +62,10 @@ PCA projection of country and capital word embeddings showing consistent vector 
 </iframe>
 
 <p style="text-align:center; max-width:800px; margin:auto;">
-        In this experiment, we examine how Word2Vec captures relationships between adjectives and their comparative and superlative forms. The embeddings of several adjective triplets (base, comparative, and superlative) were projected into two dimensions using PCA.
+These relationships are not consistently preserved in the embedding space. The transitions from base to comparative to superlative do not follow a clear or uniform pattern.
+</p>>
 
-As shown in the figure, many adjective triplets appear relatively close to each other in the embedding space, suggesting that Word2Vec captures the relationship between different degrees of comparison. In several cases, the points representing the base, comparative, and superlative forms follow a similar directional pattern.
-
-However, there are also some outliers. For example, the adjective high appears noticeably farther from its related forms compared to the other triplets, indicating that this relationship is not captured as consistently for all words.
-</p>
-
-<h1 style="text-align:center;">Plural relations</h1>
+<h2 style="text-align:center;">Plural relations</h2>
 
 <iframe
         src="outputs/docs/plural_relations.html"
@@ -84,14 +75,22 @@ However, there are also some outliers. For example, the adjective high appears n
 </iframe>
 
 <p style="text-align:center; max-width:800px; margin:auto;">
-        In this experiment, we examine the relationship between singular and plural nouns in the Word2Vec embedding space. The vectors for several singular-plural word pairs were projected into two dimensions using PCA.
-
-As shown in the figure, the vectors connecting singular and plural forms are not identical in length, and therefore they do not form perfectly consistent algebraic transformations across all words. This means that simple vector operations (for example, applying the same offset between unrelated words) would not always produce accurate results.
-
-Nevertheless, most of the vectors point in a similar direction, indicating that the model captures a consistent transformation from singular to plural forms. Interestingly, this pattern also appears for irregular forms such as mouse -> mice, where the plural is not formed by simply adding -s.
-
-However, there are also some outliers. For example, the pair city -> cities deviates noticeably from the general pattern and appears much farther away in the projection.
+Some singular-plural pairs show a clear and consistent direction in the embedding space, forming nicely aligned vectors. However, this pattern is not perfectly uniform across all pairs.
 </p>
+
+<h1 style="text-align:center;">Extrinsic Evaluation</h1>
+
+<p style="text-align:center; max-width:800px; margin:auto;">
+Evaluation was performed on three datasets: AG News, IMDB, and DBpedia. AG News is a dataset of news articles with four topic classes, used to assess how well the model captures topical information. IMDB consists of movie reviews with binary sentiment labels (positive/negative) and is used to evaluate whether embeddings capture emotional polarity. DBpedia is a multi-class dataset of structured knowledge entities, designed to test the model's ability to represent more complex semantic information. For all datasets, texts were represented using three types of embeddings: random vectors, TF-IDF, and trained Word2Vec embeddings. Document representations were obtained by averaging word vectors, and a Logistic Regression classifier was trained on top of each representation. The results show that Word2Vec significantly outperforms random embeddings and approaches the performance of TF-IDF, achieving competitive results across all tasks.
+</p>
+
+<iframe
+    src="outputs/docs/results.html"
+    width="500"
+    height="800"
+    style="border:none; display:block; margin:auto;">
+</iframe>
+
 
 
 </body>

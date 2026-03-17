@@ -4,7 +4,6 @@ import plotly.graph_objects as go
 from sklearn.decomposition import PCA
 from src.core.skip_gram_negative_sampling import Word2VecSGNS
 
-
 def plot_capital_relationships(model: Word2VecSGNS):
     V = model.V
 
@@ -67,7 +66,7 @@ def plot_capital_relationships(model: Word2VecSGNS):
             y=df_countries["y"],
             mode="markers+text",
             text=df_countries["word"],
-            textposition="middle left",
+            textposition="bottom center",
             name="Countries",
             hovertemplate="<b>%{text}</b><br>Type: country<br>x=%{x:.3f}<br>y=%{y:.3f}<extra></extra>",
             marker=dict(size=10),
@@ -81,7 +80,7 @@ def plot_capital_relationships(model: Word2VecSGNS):
             y=df_capitals["y"],
             mode="markers+text",
             text=df_capitals["word"],
-            textposition="middle right",
+            textposition="bottom center",
             name="Capitals",
             hovertemplate="<b>%{text}</b><br>Type: capital<br>x=%{x:.3f}<br>y=%{y:.3f}<extra></extra>",
             marker=dict(size=10),
@@ -108,10 +107,10 @@ def plot_capital_relationships(model: Word2VecSGNS):
         title="Country and Capital Vectors Projected by PCA",
         xaxis_title="PCA component 1",
         yaxis_title="PCA component 2",
-        width=800,
-        height=600,
+        width=950,
+        height=700,
         template="plotly_white",
     )
 
     fig.show()
-    fig.write_html("outputs/docs/capital_relationships.docs")
+    fig.write_html("outputs/docs/capital_relationships.html")

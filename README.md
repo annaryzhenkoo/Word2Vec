@@ -33,14 +33,23 @@ Objective function:
 
 ## Evaluation
 
-The learned embeddings are evaluated through several experiments:
+The learned embeddings are evaluated using two types of evaluation:
 
-* Word similarity search
-* 2D embedding visualization
-* Semantic clustering of related words
-* Analysis of morphological patterns (e.g., singular–plural forms)
+Intrinsic evaluation, including:
 
-You can find visualization here -- https://annaryzhenkoo.github.io/Word2Vec/
+- word similarity search
+
+- 2D embedding visualization
+
+- semantic clustering of related words
+
+- analysis of morphological patterns (e.g., singular–plural forms)
+
+Extrinsic evaluation, where the embeddings are applied to a downstream task:
+
+- text classification using the learned embeddings as features
+
+You can find evaluation here -- https://annaryzhenkoo.github.io/Word2Vec/
 
 ---
 
@@ -68,6 +77,23 @@ The notebook contains the full pipeline:
 * Scikit-learn
 
 ---
+## Training
+
+Model training can be launched from the script:
+
+`scripts/train_word2vec.py`
+
+The script supports the following arguments:
+
+- `--epochs` — number of training epochs  
+- `--embedding-dim` — size of the word embeddings  
+- `--optimizer` — optimization algorithm (`sgd` or `adam`)  
+- `--learning-rate` — learning rate  
+- `--negative-samples` — number of negative samples  
+- `--subsample-t` — subsampling threshold for frequent words  
+- `--context-window` — context window size  
+- `--checkpoint-every` — interval for saving checkpoints during training  
+
 
 ## References
 

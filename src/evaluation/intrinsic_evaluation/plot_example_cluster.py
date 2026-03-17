@@ -86,5 +86,5 @@ def plot_example_cluster(model: Word2VecSGNS):
     )
 
     fig.update_traces(textposition="top center")
-    fig.write_html("outputs/docs/clusters_map.docs")
+    fig.write_html("outputs/docs/clusters_map.html")
     fig.show()

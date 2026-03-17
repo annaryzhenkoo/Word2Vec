@@ -142,4 +142,4 @@ def plot_comparative_relations(model: Word2VecSGNS):
     )
 
     fig.show()
-    fig.write_html("outputs/docs/comparative_relations.docs")
+    fig.write_html("outputs/docs/comparative_relations.html")

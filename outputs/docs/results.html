@@ -1,0 +1,54 @@
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+
+table.dataframe {
+    margin: auto;
+    font-size: 22px;
+    border-collapse: collapse;
+}
+
+table.dataframe th,
+table.dataframe td {
+    padding: 12px 18px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+table.dataframe th {
+    background-color: #f5f5f5;
+}
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Method</th>
+      <th>AG News</th>
+      <th>IMDB</th>
+      <th>Dbpedia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Random</td>
+      <td>0.53</td>
+      <td>0.71</td>
+      <td>0.74</td>
+    </tr>
+    <tr>
+      <td>TF-IDF</td>
+      <td>0.89</td>
+      <td>0.88</td>
+      <td>0.96</td>
+    </tr>
+    <tr>
+      <td>Word2Vec</td>
+      <td>0.85</td>
+      <td>0.75</td>
+      <td>0.90</td>
+    </tr>
+  </tbody>
+</table>

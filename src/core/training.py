@@ -1,7 +1,7 @@
 from tqdm import tqdm
 import numpy as np
 import random
-from src.core.model_exp import Word2VecSGNS
+from src.core.skip_gram_negative_sampling import Word2VecSGNS
 from typing import List, Tuple
 
 def dataloader(data: List[Tuple[int, int]], batch_size:int, shuffle: bool=True):
