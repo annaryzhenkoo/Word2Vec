@@ -1,7 +1,7 @@
 from tqdm import tqdm
 import numpy as np
 import random
-from src.core.skip_gram_negative_sampling import Word2VecSGNS
+from src.core.model_exp import Word2VecSGNS
 from typing import List, Tuple
 
 def dataloader(data: List[Tuple[int, int]], batch_size:int, shuffle: bool=True):
@@ -60,14 +60,15 @@ def train(
     batch_size: int = 32,
     probs=None,
     rng=None,
-    dataset_name: str = "text8"
+    print_every: int = 100
 ):
 
-    total_words = num_epochs * len(data)  # for lr
     words_processed = 0
-    initial_lr = 0.05
 
     for epoch in tqdm(range(num_epochs)):
+        print("Epoch:", epoch + 1)
+        print()
+
         total_loss = 0
         batches = 0
 
@@ -75,10 +76,6 @@ def train(
             neg_ids = sample_negatives_for_batch(
                 central_ids, pos_ids, k=k, probs=probs, rng=rng
             )
-            lr = max(
-                initial_lr * (1 - words_processed / total_words), initial_lr * 0.0001
-            )
-            model.lr = lr
             model.zero_grad()
             last_loss = model.forward(central_ids, pos_ids, neg_ids)
             model.backward()
@@ -88,7 +85,13 @@ def train(
             batches += 1
             words_processed += batch_size
 
+            if batches % print_every == 0:
+                epoch_part = batches * batch_size / len(data)
+                print(f"Epoch part {epoch_part:.2f}: loss={total_loss / batches:.4f}")
+
+                filename = f"outputs/model/epoch_{epoch + 1}_part_{epoch_part:.2f}_loss_{total_loss / batches:.4f}.npz"
+                model.save(filename)
+
         print(f"epoch {epoch + 1}: loss={total_loss / batches:.4f}")
-        model.save(
-            f"{dataset_name}_w2v_n{len(data)}_v{model.V.shape[0]}_d{model.V.shape[1]}_e{epoch + 1}.npz"
-        )
+        filename = f"outputs/model/epoch_{epoch + 1}.npz"
+        model.save(filename)

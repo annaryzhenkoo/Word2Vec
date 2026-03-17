@@ -4,19 +4,22 @@ from typing import Counter
 
 def subsample(tokens: List[int], id_counts: Counter, total_tokens:int, t:int=1e-3):
     result = []
+    print("Tokens length before subsampling: ", len(tokens))
     for w in tokens:
         f = id_counts[w] / total_tokens
         p_keep = min(1.0, np.sqrt(t / f))
         if np.random.rand() < p_keep:
             result.append(w)
+    print("Tokens length after subsampling: ", len(result))
     return result
 
 
 def build_skipgram_pairs(
-    tokens: List[int], context_window: int, id_counts: Counter, total_counts:int
+    tokens: List[int], context_window: int, id_counts: Counter, total_counts:int,
+    tolerance: int = 1e-5
 ) -> List[Tuple[int, int]]:
     pairs: List[Tuple[int, int]] = []
-    tokens = subsample(tokens, id_counts, total_counts)
+    tokens = subsample(tokens, id_counts, total_counts, tolerance)
     n = len(tokens)
 
     for i in range(n):
