@@ -77,11 +77,24 @@ The notebook contains the full pipeline:
 * Scikit-learn
 
 ---
+
+## Installation
+
+This project uses `uv`.
+
+```bash
+pip install uv
+uv sync
+```
+---
+
 ## Training
 
 Model training can be launched from the script:
 
-`scripts/train_word2vec.py`
+```bash
+uv run python train_word2vec.py --epochs 5 --embedding-dim 100 --optimizer adam
+```
 
 The script supports the following arguments:
 
